@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simón Monaco — Soporte Técnico IT</title>
+  <meta name="description"
+    content="Simón Monaco, Técnico en Análisis de Sistemas. Disponible para posiciones de Soporte Técnico, Help Desk e IT Support en Argentina.">
+  <meta name="author" content="Simón Monaco">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f6f3;
+      --bg-card: #ffffff;
+      --bg-dark: #1a1917;
+      --text: #1a1917;
+      --text-muted: #6b6860;
+      --text-light: #9c9a95;
+      --accent: #d4702a;
+      --accent-light: #f0e0d0;
+      --accent-dark: #b55a1e;
+      --border: #e5e3de;
+      --border-dark: #2e2c29;
+      --green: #2d6a4f;
+      --green-bg: #d8f3dc;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .mono {
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(247, 246, 243, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .nav-logo {
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(212, 112, 42, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(212, 112, 42, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* subtle grid */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .available-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid rgba(45, 106, 79, 0.2);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .available-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.3);
+      }
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name .accent {
+      color: var(--accent);
+    }
+
+    .hero-role {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text);
+    }
+
+    /* Hero card */
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .hc-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+
+    .hc-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hc-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 2px;
+    }
+
+    .hc-role {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .hc-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0;
+    }
+
+    .hc-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .hc-stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hc-stat-val {
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .hc-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .hc-roles {
+      margin-top: 1rem;
+    }
+
+    .hc-roles-title {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .hc-role-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hc-role-item:last-child {
+      border-bottom: none;
+    }
+
+    .hc-role-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 5rem 2rem;
+    }
+
+    .section-dark {
+      background: var(--bg-dark);
+      color: #f0ede8;
+    }
+
+    .section-dark .text-muted {
+      color: #9c9a95;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-dark .section-sub {
+      color: #9c9a95;
+    }
+
+    /* ── SOBRE MÍ ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .about-detail-list {
+      margin-top: 1rem;
+      grid-column: 1/-1;
+    }
+
+    .about-detail-row {
+      display: flex;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+
+    .about-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .adr-key {
+      color: var(--text-light);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      min-width: 90px;
+      padding-top: 2px;
+    }
+
+    .adr-val {
+      color: var(--text);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .skill-box-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-list li {
+      font-size: 0.875rem;
+      color: #c8c5bf;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-list li:last-child {
+      border-bottom: none;
+    }
+
+    .skill-list li::before {
+      content: '—';
+      color: var(--accent);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    /* ── EXPERIENCIA (formación) ── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1.5rem;
+    }
+
+    .exp-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      padding-top: 3px;
+    }
+
+    .exp-year .accent {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .exp-title {
+      font-weight: 600;
+      font-size: 0.975rem;
+      margin-bottom: 2px;
+    }
+
+    .exp-inst {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .exp-badge {
+      display: inline-block;
+      margin-top: 0.6rem;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    /* ── PROYECTOS TÉCNICOS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .proj-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .proj-card:hover {
+      border-color: rgba(212, 112, 42, 0.4);
+    }
+
+    .proj-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .proj-title {
+      font-size: 0.975rem;
+      font-weight: 600;
+      color: #f0ede8;
+      margin-bottom: 0.5rem;
+    }
+
+    .proj-desc {
+      font-size: 0.845rem;
+      color: #9c9a95;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .proj-tag {
+      background: rgba(212, 112, 42, 0.1);
+      color: rgba(212, 112, 42, 0.8);
+      border: 1px solid rgba(212, 112, 42, 0.15);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── CONTACTO ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(212, 112, 42, 0.1);
+    }
+
+    .cc-icon {
+      font-size: 1.4rem;
+    }
+
+    .cc-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .cc-val {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border-dark);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: #6b6860;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: rgba(247, 246, 243, 0.99);
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 72px 1.25rem 3rem;
+      }
+
+      .section {
+        padding: 3.5rem 1.25rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .exp-card {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <div class="nav-logo">SM<span>.</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#formacion">Formación</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="available-tag">
+          <span class="available-dot"></span>
+          Disponible para trabajar
+        </div>
+        <h1 class="hero-name">Simón<br><span class="accent">Monaco</span></h1>
+        <p class="hero-role">Soporte Técnico IT · Help Desk · IT Support</p>
+        <p class="hero-desc">
+          Técnico en Análisis de Sistemas con formación sólida en hardware, software y redes.
+          Resuelvo problemas técnicos con metodología, atención al detalle y orientación al usuario.
+          Inglés B2. Basado en La Plata, Argentina — disponible para trabajo presencial o remoto.
+        </p>
+        <div class="hero-chips">
+          <span class="chip">Windows · Linux</span>
+          <span class="chip">Hardware PC</span>
+          <span class="chip">Redes TCP/IP</span>
+          <span class="chip">Diagnóstico</span>
+          <span class="chip">Inglés B2</span>
+          <span class="chip">Jira</span>
+          <span class="chip">Ticketing</span>
+          <span class="chip">Bash</span>
+          <span class="chip">Python</span>
+        </div>
+        <div class="hero-cta">
+          <a href="https://www.linkedin.com/in/sim%C3%B3n-m%C3%B3naco-55a619273" target="_blank" class="btn btn-primary"
+            rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a href="mailto:simonmonaco86@gmail.com" class="btn btn-outline">
+            simonmonaco86@gmail.com
+          </a>
+          <a href="https://github.com/MonacoSimon" target="_blank" class="btn btn-outline" rel="noopener noreferrer">
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hc-photo">
+          <img src="image/foto-linkedin.jpeg" alt="Simón Monaco">
+        </div>
+        <div class="hc-name">Simón Monaco</div>
+        <div class="hc-role">IT Support · Help Desk</div>
+        <div class="hc-divider"></div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Inglés</span>
+          <span class="hc-stat-val">B2</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Ubicación</span>
+          <span class="hc-stat-val">La Plata, ARG</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Disponibilidad</span>
+          <span class="hc-badge">Inmediata</span>
+        </div>
+        <div class="hc-divider"></div>
+        <div class="hc-roles">
+          <div class="hc-roles-title">Roles buscados</div>
+          <div class="hc-role-item"><span class="hc-role-dot"></span>Help Desk / Service Desk</div>
+          <div class="hc-role-item"><span class="hc-role-dot"></span>IT Support / Soporte N1-N2</div>
+          <div class="hc-role-item"><span class="hc-role-dot"></span>Application Support</div>
+          <div class="hc-role-item"><span class="hc-role-dot"></span>Technical Support Analyst</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="section" id="sobre-mi">
+    <div class="container">
+      <div class="section-label">Sobre mí</div>
+      <h2 class="section-title">Perfil profesional</h2>
+      <p class="section-sub">Técnico en sistemas con enfoque en resolución de problemas y soporte de usuarios</p>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            Soy Simón, técnico en Análisis de Sistemas con experiencia práctica en hardware, software,
+            redes y diagnóstico de fallas. Me formé resolviendo problemas reales — desde reparación
+            de equipos hasta configuración de entornos de trabajo — y tengo mentalidad metódica para
+            identificar la causa raíz de un problema antes de aplicar soluciones.
+          </p>
+          <p>
+            Manejo herramientas de gestión como Jira para seguimiento de tickets y documentación.
+            Tengo experiencia con entornos Linux y Windows, scripting en Bash y Python para
+            automatizar tareas repetitivas, y familiaridad con redes TCP/IP.
+          </p>
+          <p>
+            Mi inglés B2 me permite atender usuarios en inglés de forma escrita y oral sin
+            dificultades. Soy ordenado, me comunico con claridad y entiendo que el soporte
+            técnico es ante todo un servicio a personas.
+          </p>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat-box">
+            <span class="stat-num">B2</span>
+            <span class="stat-label">Inglés (EF SET 76/100)</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">2+</span>
+            <span class="stat-label">Años de formación técnica</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">Win<br>Linux</span>
+            <span class="stat-label">Sistemas operativos</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">Jira</span>
+            <span class="stat-label">Gestión de tickets</span>
+          </div>
+          <div class="about-detail-list">
+            <div class="about-detail-row">
+              <span class="adr-key">Formación</span>
+              <span class="adr-val">Técnico en Análisis de Sistemas</span>
+            </div>
+            <div class="about-detail-row">
+              <span class="adr-key">En curso</span>
+              <span class="adr-val">Tec. Universitario en Software Libre · Analista Prog. UNLP</span>
+            </div>
+            <div class="about-detail-row">
+              <span class="adr-key">Ubicación</span>
+              <span class="adr-val">La Plata, Buenos Aires, Argentina</span>
+            </div>
+            <div class="about-detail-row">
+              <span class="adr-key">Modalidad</span>
+              <span class="adr-val">Presencial · Remoto · Híbrido</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-dark" id="skills">
+    <div class="container">
+      <div class="section-label">Habilidades técnicas</div>
+      <h2 class="section-title" style="color:#f0ede8;">Stack de soporte</h2>
+      <p class="section-sub">Herramientas y conocimientos aplicables en roles de soporte técnico e IT</p>
+      <div class="skills-grid">
+        <div class="skill-box reveal">
+          <div class="skill-box-title">Sistemas & Hardware</div>
+          <ul class="skill-list">
+            <li>Windows 10/11 — instalación y config.</li>
+            <li>Linux (Ubuntu, Debian)</li>
+            <li>Diagnóstico y reparación de PC</li>
+            <li>Periféricos e impresoras</li>
+            <li>Virtualización básica</li>
+          </ul>
+        </div>
+        <div class="skill-box reveal">
+          <div class="skill-box-title">Redes & Conectividad</div>
+          <ul class="skill-list">
+            <li>TCP/IP — fundamentos</li>
+            <li>Diagnóstico de conectividad</li>
+            <li>Configuración de routers / switches</li>
+            <li>VPN básica</li>
+            <li>DNS · DHCP · HTTP</li>
+          </ul>
+        </div>
+        <div class="skill-box reveal">
+          <div class="skill-box-title">Gestión & Herramientas</div>
+          <ul class="skill-list">
+            <li>Jira — tickets y seguimiento</li>
+            <li>Documentación técnica</li>
+            <li>Git / GitHub</li>
+            <li>Bash scripting</li>
+            <li>Python — automatización</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN -->
+  <section class="section" id="formacion">
+    <div class="container">
+      <div class="section-label">Formación</div>
+      <h2 class="section-title">Educación y certificados</h2>
+      <p class="section-sub">Base técnica sólida con experiencia práctica en proyectos reales</p>
+      <div class="exp-list">
+        <div class="exp-card reveal">
+          <div class="exp-year"><span class="accent">Act.</span></div>
+          <div>
+            <div class="exp-title">Analista Programador Universitario</div>
+            <div class="exp-inst">Universidad Nacional de La Plata (UNLP) — 2025 - presente</div>
+            <div class="exp-desc">Formación universitaria en sistemas, fundamentos de redes, bases de datos y
+              programación.</div>
+            <span class="exp-badge">En curso</span>
+          </div>
+        </div>
+        <div class="exp-card reveal">
+          <div class="exp-year"><span class="accent">Act.</span></div>
+          <div>
+            <div class="exp-title">Técnico Universitario en Software Libre</div>
+            <div class="exp-inst">Universidad Nacional del Litoral — 2024 - presente</div>
+            <div class="exp-desc">Orientación en desarrollo con herramientas open source. Entornos Linux, filosofía y
+              ecosistema FOSS.</div>
+            <span class="exp-badge">En curso</span>
+          </div>
+        </div>
+        <div class="exp-card reveal">
+          <div class="exp-year">2024</div>
+          <div>
+            <div class="exp-title">Técnico en Análisis de Sistemas</div>
+            <div class="exp-inst">Instituto de Formación Docente y Técnica 210 — Graduado 2024</div>
+            <div class="exp-desc">Análisis, diseño y desarrollo de sistemas. Metodologías de desarrollo, bases de datos,
+              redes y programación. Proyecto final con rol técnico en equipo de desarrollo.</div>
+            <span class="exp-badge">Graduado</span>
+          </div>
+        </div>
+        <div class="exp-card reveal">
+          <div class="exp-year">2025</div>
+          <div>
+            <div class="exp-title">Curso de reparación de computadoras</div>
+            <div class="exp-inst">Universidad Nacional de La Plata (UNLP) — ene. 2025</div>
+            <div class="exp-desc">Diagnóstico y reparación de hardware. Identificación de fallas, reemplazo de
+              componentes y mantenimiento preventivo.</div>
+          </div>
+        </div>
+        <div class="exp-card reveal">
+          <div class="exp-year">2026</div>
+          <div>
+            <div class="exp-title">EF SET Inglés — 76/100 (C2 Proficiente)</div>
+            <div class="exp-inst">EF SET — ene. 2026</div>
+            <div class="exp-desc">Certificación internacional de inglés. Nivel B2 declarado — score C2 en la evaluación
+              estandarizada.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS TÉCNICOS -->
+  <section class="section section-dark" id="proyectos">
+    <div class="container">
+      <div class="section-label">Proyectos personales</div>
+      <h2 class="section-title" style="color:#f0ede8;">Trabajo técnico propio</h2>
+      <p class="section-sub">Proyectos que demuestran capacidad de diagnóstico, documentación y resolución de problemas
+      </p>
+      <div class="projects-grid">
+        <div class="proj-card reveal">
+          <div class="proj-type">Entornos multi-contenedor</div>
+          <div class="proj-title">Pipeline CI/CD con Docker y Jenkins</div>
+          <div class="proj-desc">Configuración y mantenimiento de entornos Docker con múltiples servicios corriendo en
+            paralelo. Diagnóstico de problemas de red entre contenedores, puertos y dependencias de arranque.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Docker</span>
+            <span class="proj-tag">Linux</span>
+            <span class="proj-tag">Bash</span>
+            <span class="proj-tag">Logs</span>
+          </div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-type">Cloud & Infraestructura</div>
+          <div class="proj-title">Integración AWS con LocalStack</div>
+          <div class="proj-desc">Configuración de servicios AWS (S3, DynamoDB, SQS, Lambda) en entorno local. Scripts
+            Python con boto3 para setup automatizado y diagnóstico de fallos en la infraestructura.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">AWS</span>
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">boto3</span>
+            <span class="proj-tag">CLI</span>
+          </div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-type">Diagnóstico & Documentación</div>
+          <div class="proj-title">Testing y reporte de bugs en aplicaciones web</div>
+          <div class="proj-desc">Diseño de casos de prueba, reproducción de errores, documentación detallada de bugs con
+            pasos de reproducción, evidencia visual y priorización. Registro en Jira.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Jira</span>
+            <span class="proj-tag">Bug reports</span>
+            <span class="proj-tag">Documentación</span>
+          </div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-type">Automatización de tareas</div>
+          <div class="proj-title">Scripts Bash y Python para tareas repetitivas</div>
+          <div class="proj-desc">Scripts para limpieza de entornos, arranque ordenado de servicios, generación de
+            reportes y monitoreo básico de procesos. Aplicados en proyectos propios con 66+ commits documentados.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Bash</span>
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Git</span>
+            <span class="proj-tag">Automatización</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:2rem; text-align:center;">
+        <a href="https://github.com/MonacoSimon" target="_blank" class="btn btn-outline"
+          style="color:#f0ede8; border-color:#2e2c29;" rel="noopener noreferrer">
+          Ver todos los proyectos en GitHub →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="section-label">Contacto</div>
+      <h2 class="section-title">Hablemos</h2>
+      <p class="section-sub">Disponible para posiciones de soporte técnico, help desk e IT support</p>
+      <div class="contact-grid reveal">
+        <a href="https://www.linkedin.com/in/sim%C3%B3n-m%C3%B3naco-55a619273" target="_blank" class="contact-card"
+          rel="noopener noreferrer">
+          <div class="cc-icon">💼</div>
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-val">Simón Monaco</div>
+        </a>
+        <a href="mailto:simonmonaco2001@gmail.com" class="contact-card">
+          <div class="cc-icon">✉️</div>
+          <div class="cc-label">Email</div>
+          <div class="cc-val">simonmonaco2001@gmail.com</div>
+        </a>
+        <a href="https://github.com/MonacoSimon" target="_blank" class="contact-card" rel="noopener noreferrer">
+          <div class="cc-icon">⌨️</div>
+          <div class="cc-label">GitHub</div>
+          <div class="cc-val">MonacoSimon</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Simón Monaco — Soporte Técnico IT — La Plata, Argentina
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+    // Mobile menu
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 70);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => obs.observe(r));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function (e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' }); }
+      });
+    });
+  </script>
+</body>
+
+</html>
